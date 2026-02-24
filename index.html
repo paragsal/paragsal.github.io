@@ -18,7 +18,7 @@
   <!-- Nav -->
   <header>
     <nav>
-      <a href="#" class="logo" aria-label="Home">~/parag</a>
+      <a href="#" class="logo" aria-label="Home" data-tooltip="press ` to open terminal">~/parag</a>
       <div class="nav-right">
         <ul>
           <li><a href="#experience">experience</a></li>
@@ -38,7 +38,7 @@
     <section class="hero" id="stats">
       <div class="hero-intro">
         <div class="hero-prompt anim-reveal" style="--delay: 0.1s">
-          <span class="prompt-char">$</span> whoami
+          <span class="prompt-char">$</span> <span class="typewriter" data-text="whoami" data-delay="300"></span>
         </div>
         <h1 class="hero-name anim-reveal" style="--delay: 0.3s">
           Parag Salgaonkar<span class="cursor">_</span>
@@ -50,7 +50,7 @@
       </div>
       <div class="hero-stats anim-reveal" style="--delay: 0.5s">
         <div class="hero-stats-header">
-          <span class="prompt-char">$</span> cat /proc/career/stack
+          <span class="prompt-char">$</span> <span class="typewriter" data-text="cat /proc/career/stack" data-delay="800"></span>
         </div>
         <div class="stats-grid">
           <div class="stat-row">
@@ -277,6 +277,25 @@
       <p class="footer-made">// engineered for reliability</p>
     </div>
   </footer>
+
+  <!-- Easter Egg Terminal (press ~ to toggle) -->
+  <div class="terminal-overlay" id="terminalOverlay" aria-hidden="true">
+    <div class="terminal-window">
+      <div class="terminal-bar">
+        <span class="terminal-title">parag@sre:~</span>
+        <button class="terminal-close" id="terminalClose" aria-label="Close terminal">&times;</button>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div class="terminal-output" id="terminalOutput">
+          <div class="terminal-line">Welcome to parag.sh — type <span style="color:var(--accent)">help</span> for commands</div>
+        </div>
+        <div class="terminal-input-line">
+          <span class="prompt-char">$</span>
+          <input type="text" class="terminal-input" id="terminalInput" autocomplete="off" spellcheck="false" autofocus>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

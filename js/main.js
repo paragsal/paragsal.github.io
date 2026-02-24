@@ -249,6 +249,173 @@
   }
 })();
 
+// ---- Typewriter Effect ----
+(function () {
+  const elements = document.querySelectorAll(".typewriter");
+  if (!elements.length) return;
+
+  elements.forEach((el) => {
+    const text = el.dataset.text || "";
+    const startDelay = parseInt(el.dataset.delay, 10) || 0;
+    el.textContent = "";
+    el.style.borderRight = "2px solid var(--accent)";
+
+    setTimeout(() => {
+      let i = 0;
+      const speed = 55 + Math.random() * 25;
+      function type() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed + (Math.random() - 0.5) * 30);
+        } else {
+          // Remove cursor after typing is done
+          setTimeout(() => { el.style.borderRight = "none"; }, 600);
+        }
+      }
+      type();
+    }, startDelay);
+  });
+})();
+
+// ---- Easter Egg Terminal ----
+(function () {
+  const overlay = document.getElementById("terminalOverlay");
+  const input = document.getElementById("terminalInput");
+  const output = document.getElementById("terminalOutput");
+  const closeBtn = document.getElementById("terminalClose");
+  if (!overlay || !input || !output) return;
+
+  const commands = {
+    help: () =>
+      "Available commands:\n" +
+      "  <span style='color:var(--accent)'>whoami</span>      — about me\n" +
+      "  <span style='color:var(--accent)'>skills</span>      — tech stack\n" +
+      "  <span style='color:var(--accent)'>experience</span>  — career history\n" +
+      "  <span style='color:var(--accent)'>contact</span>     — get in touch\n" +
+      "  <span style='color:var(--accent)'>certs</span>       — certifications\n" +
+      "  <span style='color:var(--accent)'>education</span>   — degrees\n" +
+      "  <span style='color:var(--accent)'>uptime</span>      — career uptime\n" +
+      "  <span style='color:var(--accent)'>clear</span>       — clear screen\n" +
+      "  <span style='color:var(--accent)'>exit</span>        — close terminal",
+    whoami: () =>
+      "Parag Salgaonkar\n" +
+      "Senior Site Reliability Engineer\n" +
+      "Focus: Infrastructure, Reliability, Scale",
+    skills: () =>
+      "cloud/       AWS · Terraform · ECS · K8s\n" +
+      "languages/   Python · Go · Bash\n" +
+      "ops/         CI/CD · Observability · IaC\n" +
+      "ai-ml/       LLMs · RAG · Knowledge Graphs",
+    experience: () =>
+      "2023-now   Sr. SRE @ Osano Inc.\n" +
+      "2021-2023  Sr. SRE @ WireWheel Inc.\n" +
+      "2019-2021  DevOps Engineer @ WireWheel Inc.\n" +
+      "2017-2018  Data Engineer @ WireWheel Inc.\n" +
+      "2017       Software Dev @ JIFSAN (FDA/USDA)",
+    contact: () =>
+      "github:   <a href='https://github.com/paragsal' target='_blank' style='color:var(--accent)'>paragsal</a>\n" +
+      "linkedin: <a href='https://linkedin.com/in/paragsal' target='_blank' style='color:var(--accent)'>paragsal</a>\n" +
+      "email:    <a href='mailto:parag.s@live.in' style='color:var(--accent)'>parag.s@live.in</a>",
+    certs: () =>
+      "<span style='color:var(--green)'>●</span> AWS Certified Developer\n" +
+      "<span style='color:var(--green)'>●</span> AWS Solutions Architect\n" +
+      "<span style='color:var(--green)'>●</span> CKAD (Kubernetes)",
+    education: () =>
+      "M.S. Telecommunications Engineering\n" +
+      "  University of Maryland, College Park — 2018\n\n" +
+      "B.E. Electronics & Telecom Engineering\n" +
+      "  University of Mumbai, India — 2016",
+    uptime: () => {
+      const start = new Date("2017-01-01");
+      const now = new Date();
+      const years = ((now - start) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1);
+      return `Career uptime: ${years} years\nStatus: <span style='color:var(--green)'>● operational</span>\nIncidents: 0 unresolved`;
+    },
+    clear: () => "__CLEAR__",
+    exit: () => "__EXIT__",
+  };
+
+  function addLine(html, isCmd) {
+    const div = document.createElement("div");
+    div.classList.add("terminal-line");
+    if (isCmd) {
+      div.innerHTML = `<span class="cmd-echo">$ ${html}</span>`;
+    } else {
+      div.innerHTML = html;
+    }
+    output.appendChild(div);
+    output.scrollTop = output.scrollHeight;
+  }
+
+  function processCommand(raw) {
+    const cmd = raw.trim().toLowerCase();
+    addLine(raw, true);
+
+    if (!cmd) return;
+
+    if (commands[cmd]) {
+      const result = typeof commands[cmd] === "function" ? commands[cmd]() : commands[cmd];
+      if (result === "__CLEAR__") {
+        output.innerHTML = "";
+        return;
+      }
+      if (result === "__EXIT__") {
+        toggle(false);
+        return;
+      }
+      addLine(result);
+    } else {
+      addLine(`command not found: ${cmd}. Type <span style="color:var(--accent)">help</span> for available commands.`);
+    }
+  }
+
+  function toggle(open) {
+    if (open) {
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      setTimeout(() => input.focus(), 100);
+    } else {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  // Toggle with backtick key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "`" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      const active = document.activeElement;
+      // Don't trigger if typing in another input
+      if (active && active !== input && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) return;
+      e.preventDefault();
+      const isOpen = overlay.classList.contains("is-open");
+      toggle(!isOpen);
+    }
+    // Escape to close
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) {
+      toggle(false);
+    }
+  });
+
+  // Enter to run command
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      processCommand(input.value);
+      input.value = "";
+    }
+  });
+
+  // Close button
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => toggle(false));
+  }
+
+  // Click overlay to close
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) toggle(false);
+  });
+})();
+
 // ---- Smooth Anchor Scroll ----
 (function () {
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
