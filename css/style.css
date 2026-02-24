@@ -296,11 +296,17 @@ nav ul a:hover::after { width: 100%; }
   align-items: center;
   padding: 0.6rem 1.25rem;
   font-size: 0.78rem;
-  transition: background 0.2s;
+  transition: background 0.2s, border-color 0.2s;
+  border-left: 2px solid transparent;
 }
 
 .stat-row:hover {
   background: var(--surface);
+  border-left-color: var(--accent);
+}
+
+.stat-row:hover .stat-key {
+  color: var(--accent);
 }
 
 .stat-key {
