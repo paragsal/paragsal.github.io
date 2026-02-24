@@ -294,6 +294,11 @@ nav ul a:hover::after { width: 100%; }
   color: var(--text);
 }
 
+.meta-dim {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
 /* Hero stats */
 .hero-stats {
   background: var(--bg-elevated);
