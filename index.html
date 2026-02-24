@@ -3,44 +3,275 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parag Salgaonkar</title>
+  <title>Parag Salgaonkar — Senior SRE</title>
+  <meta name="description" content="Senior Site Reliability Engineer building scalable infrastructure and AI systems. 8+ years of experience across cloud platforms, containers, and privacy tech.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
+  <canvas id="constellation" aria-hidden="true"></canvas>
+
+  <!-- Nav -->
   <header>
     <nav>
-      <a href="#" class="logo">PS</a>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <a href="#" class="logo" aria-label="Home">~/parag</a>
+      <div class="nav-right">
+        <ul>
+          <li><a href="#experience">experience</a></li>
+          <li><a href="#skills">skills</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="theme-icon theme-icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <h1>Parag Salgaonkar</h1>
-      <p class="tagline">Software Engineer</p>
+    <!-- Hero + Stats -->
+    <section class="hero" id="stats">
+      <div class="hero-intro">
+        <div class="hero-prompt anim-reveal" style="--delay: 0.1s">
+          <span class="prompt-char">$</span> whoami
+        </div>
+        <h1 class="hero-name anim-reveal" style="--delay: 0.3s">
+          Parag Salgaonkar<span class="cursor">_</span>
+        </h1>
+        <div class="hero-meta anim-reveal" style="--delay: 0.5s">
+          <span class="meta-key">role</span><span class="meta-sep">:</span> <span class="meta-val">Senior Site Reliability Engineer</span><br>
+          <span class="meta-key">focus</span><span class="meta-sep">:</span> <span class="meta-val">Infrastructure, Reliability, Scale</span>
+        </div>
+      </div>
+      <div class="hero-stats anim-reveal" style="--delay: 0.5s">
+        <div class="hero-stats-header">
+          <span class="prompt-char">$</span> cat /proc/career/stack
+        </div>
+        <div class="stats-grid">
+          <div class="stat-row">
+            <span class="stat-key">cloud</span>
+            <span class="stat-dots"></span>
+            <span class="stat-val">AWS <span class="stat-accent">·</span> Terraform <span class="stat-accent">·</span> ECS <span class="stat-accent">·</span> K8s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-key">languages</span>
+            <span class="stat-dots"></span>
+            <span class="stat-val">Python <span class="stat-accent">·</span> Go <span class="stat-accent">·</span> Bash</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-key">ops</span>
+            <span class="stat-dots"></span>
+            <span class="stat-val">CI/CD <span class="stat-accent">·</span> Observability <span class="stat-accent">·</span> IaC</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-key">certs</span>
+            <span class="stat-dots"></span>
+            <span class="stat-val">AWS <span class="stat-accent">x2</span> <span class="stat-accent">·</span> CKAD</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="about" class="about">
-      <h2>About</h2>
-      <p>
-        Welcome to my personal page. I'm a software engineer passionate about
-        building clean, efficient solutions. More details coming soon.
-      </p>
+    <!-- Experience -->
+    <section id="experience" class="experience">
+      <div class="section-header anim-scroll">
+        <span class="prompt-char">$</span>
+        <span class="section-cmd">history --career</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item anim-scroll">
+          <div class="timeline-marker">
+            <span class="timeline-dot active"></span>
+            <span class="timeline-connector"></span>
+          </div>
+          <div class="timeline-date">
+            <span class="timeline-year">2023 — present</span>
+            <span class="timeline-badge now">active</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">Senior Site Reliability Engineer</h3>
+            <p class="timeline-company">Osano Inc. <span class="timeline-loc">Arlington, VA</span></p>
+            <ul class="timeline-highlights">
+              <li>Migrated all infrastructure to Terraform; reduced API costs by 20% at 1.2B requests/month scale</li>
+              <li>Built Docker image pipeline with GitHub Actions for secure org-wide base images</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item anim-scroll">
+          <div class="timeline-marker">
+            <span class="timeline-dot"></span>
+            <span class="timeline-connector"></span>
+          </div>
+          <div class="timeline-date">
+            <span class="timeline-year">2021 — 2023</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">Senior Site Reliability Engineer</h3>
+            <p class="timeline-company">WireWheel Inc. <span class="timeline-loc">Arlington, VA</span></p>
+            <ul class="timeline-highlights">
+              <li>Designed multi-region AWS infra for a Privacy Consent platform using CDK — flagship product, Fortune 500 clients, ~30M req/day</li>
+              <li>Reduced AWS costs by 30% through VPC endpoints, ALB consolidation, cross-AZ traffic reduction</li>
+              <li>Formalized on-call with PagerDuty; built incident response runbooks and SOC-2 compliance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item anim-scroll">
+          <div class="timeline-marker">
+            <span class="timeline-dot"></span>
+            <span class="timeline-connector"></span>
+          </div>
+          <div class="timeline-date">
+            <span class="timeline-year">2019 — 2021</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">DevOps Engineer</h3>
+            <p class="timeline-company">WireWheel Inc. <span class="timeline-loc">Arlington, VA</span></p>
+            <ul class="timeline-highlights">
+              <li>Migrated EC2 monolith to microservices with Terraform, EKS & Helm</li>
+              <li>Transitioned Kubernetes to ECS; built internal tooling for releases, backups, DR</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item anim-scroll">
+          <div class="timeline-marker">
+            <span class="timeline-dot"></span>
+            <span class="timeline-connector"></span>
+          </div>
+          <div class="timeline-date">
+            <span class="timeline-year">2017 — 2018</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">Data Engineer</h3>
+            <p class="timeline-company">WireWheel Inc. <span class="timeline-loc">Arlington, VA</span></p>
+            <ul class="timeline-highlights">
+              <li>Built Python/Flask apps for resource discovery across AWS, GCP, Azure for GDPR compliance</li>
+              <li>Created NLP summarization service with spaCy for privacy policy ranking</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item anim-scroll">
+          <div class="timeline-marker">
+            <span class="timeline-dot"></span>
+          </div>
+          <div class="timeline-date">
+            <span class="timeline-year">2017</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">Software Developer</h3>
+            <p class="timeline-company">JIFSAN (FDA/USDA) <span class="timeline-loc">College Park, MD</span></p>
+            <ul class="timeline-highlights">
+              <li>Developed a Python backend using Pandas and MySQL with FDA/USDA to provide nutritional transparency for processed foods</li>
+              <li>Implemented Jenkins pipelines for AMI builds, testing, and deployment on AWS (EC2, RDS, ALB)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="education anim-scroll">
+        <div class="education-label">
+          <span class="prompt-char">#</span> education
+        </div>
+        <div class="education-grid">
+          <div class="education-item">
+            <span class="education-degree">M.S. Telecommunications Engineering</span>
+            <span class="education-school">University of Maryland, College Park — 2018</span>
+          </div>
+          <div class="education-item">
+            <span class="education-degree">B.E. Electronics & Telecom Engineering</span>
+            <span class="education-school">University of Mumbai, India — 2016</span>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <!-- Skills — flat inline + certs -->
+    <section id="skills" class="skills">
+      <div class="section-header anim-scroll">
+        <span class="prompt-char">$</span>
+        <span class="section-cmd">ls -la ./skills/</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="skills-flat anim-scroll">
+        <div class="skill-line">
+          <span class="skill-dir">cloud/</span>
+          <span class="tag tag-primary">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span>
+        </div>
+        <div class="skill-line">
+          <span class="skill-dir">iac/</span>
+          <span class="tag tag-primary">Terraform</span><span class="tag">CDK</span><span class="tag">CloudFormation</span>
+        </div>
+        <div class="skill-line">
+          <span class="skill-dir">lang/</span>
+          <span class="tag tag-primary">Python</span><span class="tag">Bash</span><span class="tag">Go</span><span class="tag">JavaScript</span><span class="tag">C</span>
+        </div>
+        <div class="skill-line">
+          <span class="skill-dir">containers/</span>
+          <span class="tag tag-primary">ECS</span><span class="tag tag-primary">Kubernetes</span><span class="tag">EKS</span><span class="tag">GKE</span><span class="tag">kOps</span><span class="tag">Docker</span>
+        </div>
+        <div class="skill-line">
+          <span class="skill-dir">cicd/</span>
+          <span class="tag tag-primary">GitHub Actions</span><span class="tag">CodePipeline</span><span class="tag">Jenkins</span><span class="tag">GitLab</span><span class="tag">CircleCI</span>
+        </div>
+        <div class="skill-line">
+          <span class="skill-dir">observability/</span>
+          <span class="tag">CloudWatch</span><span class="tag">SumoLogic</span><span class="tag">PagerDuty</span><span class="tag">Fluentd</span>
+        </div>
+        <div class="skill-line">
+          <span class="skill-dir">ai-ml/</span>
+          <span class="tag">LLMs</span><span class="tag">RAG</span><span class="tag">Neo4j</span><span class="tag">spaCy</span><span class="tag">Knowledge Graphs</span>
+        </div>
+      </div>
+
+      <div class="certs-inline anim-scroll">
+        <span class="prompt-char">#</span> certs:
+        <span class="cert-inline"><span class="cert-dot"></span>AWS Developer</span>
+        <span class="cert-inline"><span class="cert-dot"></span>AWS Solutions Architect</span>
+        <span class="cert-inline"><span class="cert-dot"></span>CKAD</span>
+      </div>
+    </section>
+
+    <!-- Contact -->
     <section id="contact" class="contact">
-      <h2>Contact</h2>
-      <ul>
-        <li><a href="https://github.com/paragsal" target="_blank" rel="noopener">GitHub</a></li>
-      </ul>
+      <div class="section-header anim-scroll">
+        <span class="prompt-char">$</span>
+        <span class="section-cmd">cat ./contact.yml</span>
+        <span class="section-line"></span>
+      </div>
+      <div class="contact-inline anim-scroll">
+        <a href="https://github.com/paragsal" target="_blank" rel="noopener" class="contact-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <span>paragsal</span>
+        </a>
+        <a href="https://linkedin.com/in/paragsal" target="_blank" rel="noopener" class="contact-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <span>paragsal</span>
+        </a>
+        <a href="mailto:parag.s@live.in" class="contact-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          <span>parag.s@live.in</span>
+        </a>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 Parag Salgaonkar</p>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Parag Salgaonkar</p>
+      <p class="footer-made">// engineered for reliability</p>
+    </div>
   </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
