@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thoughts — Parag Salgaonkar</title>
+  <meta name="description" content="Writing and thoughts by Parag Salgaonkar on infrastructure, reliability, and AI.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <canvas id="constellation" aria-hidden="true"></canvas>
+
+  <header>
+    <nav>
+      <a href="/" class="logo" aria-label="Home">~/parag</a>
+      <div class="nav-right">
+        <ul>
+          <li><a href="/now">now</a></li>
+          <li><a href="/thoughts" class="nav-active">thoughts</a></li>
+          <li><a href="/#experience">experience</a></li>
+          <li><a href="/#skills">skills</a></li>
+          <li><a href="/#contact">contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+          <svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="theme-icon theme-icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-content">
+      <div class="section-header anim-reveal" style="--delay: 0.1s">
+        <span class="prompt-char">$</span>
+        <span class="section-cmd" id="sectionCmd">ls ./thoughts/</span>
+        <span class="section-line"></span>
+      </div>
+
+      <!-- Post list view -->
+      <div id="postList" class="post-list anim-reveal" style="--delay: 0.2s"></div>
+
+      <!-- Single post view (hidden by default) -->
+      <div id="postView" class="post-view" style="display: none;">
+        <a href="/thoughts" class="post-back anim-reveal" style="--delay: 0.1s">
+          <span class="prompt-char">&lt;</span> back to thoughts
+        </a>
+        <article class="md-content anim-reveal" style="--delay: 0.2s" id="postContent"></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Parag Salgaonkar</p>
+      <p class="footer-made">// engineered for reliability</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    (function () {
+      const listEl = document.getElementById('postList');
+      const viewEl = document.getElementById('postView');
+      const contentEl = document.getElementById('postContent');
+      const cmdEl = document.getElementById('sectionCmd');
+
+      function getSlug() {
+        return window.location.hash.replace('#', '');
+      }
+
+      function renderList(posts) {
+        if (!posts.length) {
+          listEl.innerHTML = '<p class="md-loading">No posts yet.</p>';
+          return;
+        }
+        listEl.innerHTML = posts.map(p =>
+          `<a href="#${p.slug}" class="post-card">
+            <span class="post-card-date">${p.date}</span>
+            <span class="post-card-title">${p.title}</span>
+            <span class="post-card-desc">${p.description}</span>
+          </a>`
+        ).join('');
+      }
+
+      function showPost(slug) {
+        listEl.style.display = 'none';
+        viewEl.style.display = 'block';
+        cmdEl.textContent = `cat ./thoughts/${slug}.md`;
+        contentEl.innerHTML = '<p class="md-loading">Loading...</p>';
+
+        fetch(`posts/${slug}.md`)
+          .then(r => r.ok ? r.text() : Promise.reject('Not found'))
+          .then(md => { contentEl.innerHTML = marked.parse(md); })
+          .catch(() => { contentEl.innerHTML = '<p>Post not found.</p>'; });
+      }
+
+      function showList() {
+        listEl.style.display = '';
+        viewEl.style.display = 'none';
+        cmdEl.textContent = 'ls ./thoughts/';
+      }
+
+      function route() {
+        const slug = getSlug();
+        if (slug) { showPost(slug); } else { showList(); }
+      }
+
+      // Load posts manifest and initialize
+      fetch('posts.json')
+        .then(r => r.json())
+        .then(posts => {
+          renderList(posts);
+          route();
+        })
+        .catch(() => {
+          listEl.innerHTML = '<p>Could not load posts.</p>';
+        });
+
+      window.addEventListener('hashchange', route);
+    })();
+  </script>
+</body>
+</html>

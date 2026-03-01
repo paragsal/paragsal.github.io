@@ -17,6 +17,9 @@ Personal portfolio/website for Parag Salgaonkar, hosted on GitHub Pages.
 ├── css/style.css     # All styles
 ├── js/               # JavaScript modules
 ├── docs/             # Documentation / assets
+├── favicon.svg       # Site favicon
+├── CNAME             # Custom domain config
+├── _config.yml       # Jekyll config (excludes CLAUDE.md, README, LICENSE from build)
 └── CLAUDE.md
 ```
 
@@ -36,5 +39,5 @@ Personal portfolio/website for Parag Salgaonkar, hosted on GitHub Pages.
 
 ## Git
 
-- Branch naming: `<author>/<description>` (e.g. `parag/init`)
+- Branch naming: `<type>/<description>` or `<author>/<description>` (e.g. `feat/dark-mode`, `parag/init`)
 - Keep commits concise and descriptive
