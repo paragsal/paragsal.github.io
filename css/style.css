@@ -1137,6 +1137,77 @@ nav ul a.nav-active::after {
   color: var(--accent);
 }
 
+.agent-raw {
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.agent-raw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.agent-raw-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.agent-copy-btn {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--accent-dim);
+  border-radius: 2px;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.agent-copy-btn:hover {
+  background: var(--accent-glow);
+}
+
+.agent-raw-pre {
+  margin: 0;
+  padding: 1.5rem;
+  background: var(--surface);
+  overflow-x: auto;
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.agent-raw-pre code {
+  font-family: var(--mono);
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.footer-agent-link {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.footer-agent-link:hover {
+  color: var(--accent);
+}
+
 @media (max-width: 640px) {
   .page-content {
     padding: 6rem 1.25rem 2rem;
