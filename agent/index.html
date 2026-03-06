@@ -3,13 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Now — Parag Salgaonkar</title>
-  <meta name="description" content="What Parag Salgaonkar is doing now.">
+  <title>Agent Briefing — Parag Salgaonkar</title>
+  <meta name="description" content="Machine-readable briefing for AI agents about Parag Salgaonkar, Senior Site Reliability Engineer.">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Parag Salgaonkar",
+    "jobTitle": "Senior Site Reliability Engineer",
+    "url": "https://paragsal.github.io",
+    "email": "parag.s@live.in",
+    "sameAs": [
+      "https://github.com/paragsal",
+      "https://linkedin.com/in/paragsal"
+    ],
+    "knowsAbout": [
+      "Site Reliability Engineering",
+      "AWS",
+      "Terraform",
+      "Kubernetes",
+      "ECS",
+      "Python",
+      "Go",
+      "CI/CD",
+      "Infrastructure as Code",
+      "Observability",
+      "LLMs",
+      "RAG",
+      "Knowledge Graphs"
+    ],
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Maryland, College Park"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Mumbai"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -20,12 +59,12 @@
       <a href="/" class="logo" aria-label="Home">~/parag</a>
       <div class="nav-right">
         <ul>
-          <li><a href="/now" class="nav-active">now</a></li>
+          <li><a href="/now">now</a></li>
           <li><a href="/thoughts">thoughts</a></li>
           <li><a href="/#experience">experience</a></li>
           <li><a href="/#skills">skills</a></li>
           <li><a href="/#contact">contact</a></li>
-          <li><a href="/agent">agent</a></li>
+          <li><a href="/agent" class="nav-active">agent</a></li>
         </ul>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
           <svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -39,12 +78,16 @@
     <section class="page-content">
       <div class="section-header anim-reveal" style="--delay: 0.1s">
         <span class="prompt-char">$</span>
-        <span class="section-cmd">cat ./now.md</span>
+        <span class="section-cmd">cat ./agent.md</span>
         <span class="section-line"></span>
       </div>
-      <article class="md-content anim-reveal" style="--delay: 0.2s" id="nowContent">
-        <p class="md-loading">Loading...</p>
-      </article>
+      <div class="agent-raw anim-reveal" style="--delay: 0.2s">
+        <div class="agent-raw-header">
+          <span class="agent-raw-label">agent.md</span>
+          <button class="agent-copy-btn" id="copyBtn" aria-label="Copy markdown">copy</button>
+        </div>
+        <pre class="agent-raw-pre" id="agentRaw"><code id="agentContent">Loading...</code></pre>
+      </div>
     </section>
   </main>
 
@@ -55,15 +98,27 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="../js/main.js"></script>
   <script>
     (function () {
-      const container = document.getElementById('nowContent');
-      fetch('now.md')
+      const content = document.getElementById('agentContent');
+      const copyBtn = document.getElementById('copyBtn');
+      let rawMd = '';
+
+      fetch('agent.md')
         .then(r => r.ok ? r.text() : Promise.reject('Not found'))
-        .then(md => { container.innerHTML = marked.parse(md); })
-        .catch(() => { container.innerHTML = '<p>Could not load content.</p>'; });
+        .then(md => {
+          rawMd = md;
+          content.textContent = md;
+        })
+        .catch(() => { content.textContent = 'Could not load content.'; });
+
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(rawMd).then(function () {
+          copyBtn.textContent = 'copied!';
+          setTimeout(function () { copyBtn.textContent = 'copy'; }, 2000);
+        });
+      });
     })();
   </script>
 </body>
